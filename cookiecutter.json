@@ -1,0 +1,14 @@
+{
+    "full_name": "Some Dev",
+    "app_name": "example.com/sandbooxproj",
+    "project_short_description": "A Golang project.",
+    "docker_hub_username": "dial",
+    "docker_image": "dial/base-image:latest",
+    "docker_build_image": "dial/golang-buildimage",
+    "docker_build_image_version": "1.11.9",
+    "use_docker": "y",
+    "use_git": "y",
+    "use_logrus_logging": "y",
+    "use_viper_config": "y",
+    "use_cobra_cmd": "y"
+}

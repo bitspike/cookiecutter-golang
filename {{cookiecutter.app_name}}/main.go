@@ -1,0 +1,34 @@
+package main
+
+import (
+	{%- if cookiecutter.use_cobra_cmd == "n" %}
+        "flag"
+	"fmt"
+	"{{cookiecutter.app_name}}/version"
+        {%- endif %}
+	{% if cookiecutter.use_cobra_cmd == "y" %}"{{cookiecutter.app_name}}/cmd"{% endif %}
+	"{{cookiecutter.app_name}}/config"
+	"{{cookiecutter.app_name}}/log"
+)
+
+func main() {
+	config.Initialize()
+	log.Initialize()
+	cmd.Initialize()
+    {%- if cookiecutter.use_cobra_cmd == "y" %}
+	cmd.Execute()
+    {%- else %}
+	versionFlag := flag.Bool("version", false, "Version")
+	flag.Parse()
+
+	if *versionFlag {
+		fmt.Println("Build Date:", version.BuildDate)
+        fmt.Println("Git Commit:", version.GitCommit)
+        fmt.Println("Version:", version.Version)
+        fmt.Println("Go Version:", version.GoVersion)
+        fmt.Println("OS / Arch:", version.OsArch)
+		return
+	}
+	fmt.Println("Hello.")
+    {%- endif %}
+}
