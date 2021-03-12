@@ -1,6 +1,7 @@
 {
     "full_name": "Some Dev",
-    "app_name": "example.com/sandbooxproj",
+    "app_name": "example.com/sandboxproj",
+    "main_name": "{{cookiecutter.app_name.split('/')[-1]}}",
     "project_short_description": "A Golang project.",
     "docker_hub_username": "dial",
     "docker_image": "dial/base-image:latest",

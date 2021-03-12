@@ -42,7 +42,7 @@ func LoadConfigProvider(appName string) Provider {
 // Initialize must be called at the very beginning of the application
 // and before any other function of this package
 func Initialize() {
-	defaultConfig = readViperConfig("{{cookiecutter.app_name|upper}}")
+	defaultConfig = readViperConfig("{{cookiecutter.main_name|upper}}")
 }
 
 func readViperConfig(appName string) *viper.Viper {

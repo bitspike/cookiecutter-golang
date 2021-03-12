@@ -409,7 +409,6 @@ linters:
     - gosimple
     - govet
     - ineffassign
-    - interfacer
     - lll
     - misspell
     - nakedret

@@ -22,7 +22,7 @@ help:
 	@echo '    make build           Compile the project.'
 	@echo '    make update-tools           Use to update build tools (i.e. golangci-lint, testify).'
 	@echo '    make lint        runs golangci-lint run  against your source code, mostly used for ci.'
-	{% if cookiecutter.use_docker == "y" %}@echo '    make build-alpine    Compile optimized for alpine linux.'
+	{% if cookiecutter.use_docker == "y" %}@echo '    make build-docker    Compile optimized for docker.'
 	@echo '    make package         Build final docker image with just the go binary inside'
 	@echo '    make tag             Tag image created by package with latest, git commit and version'
 	@echo '    make test            Run tests on a compiled project.'
@@ -42,7 +42,7 @@ update-tools:
 lint:
 	golangci-lint run
 {% if cookiecutter.use_docker == "y" %}
-build-alpine:
+build-docker:
 	@echo "building ${BIN_NAME} ${VERSION}"
 	@echo "GOPATH=${GOPATH}"
 	go build -ldflags '-w -linkmode external -extldflags "-static" -X {{cookiecutter.app_name}}/version.GitCommit=${GIT_COMMIT}${GIT_DIRTY} -X {{cookiecutter.app_name}}/version.BuildDate=${BUILD_DATE}' -o bin/${BIN_NAME}
