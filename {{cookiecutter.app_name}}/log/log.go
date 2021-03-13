@@ -38,21 +38,21 @@ type Logger interface {
 	Warnln(args ...interface{})
 }
 
-var defaultLogger *logrus.Logger
+var defaultLogger *logrus.Logger // nolint:gochecknoglobals
 
 // Initialize must be called at the very beginning of the application
-// and before any other function of this package
+// and before any other function of this package.
 func Initialize() {
 	defaultLogger = newLogrusLogger(config.Config())
 }
 
 {% if cookiecutter.use_viper_config == "y" -%}
-// NewLogger returns a configured logrus instance
+// NewLogger returns a configured logrus instance.
 func NewLogger(cfg config.Provider) *logrus.Logger {
 	return newLogrusLogger(cfg)
 }
 {%- else -%}
-// NewLogger returns logrus instance
+// NewLogger returns logrus instance.
 func NewLogger() *logrus.Logger {
 	return newLogrusLogger()
 }
@@ -68,6 +68,7 @@ func newLogrusLogger() *logrus.Logger {
 	if cfg.GetBool("json_logs") {
 		l.Formatter = new(logrus.JSONFormatter)
 	}
+
 	l.Out = os.Stderr
 
 	switch cfg.GetString("loglevel") {
@@ -85,24 +86,26 @@ func newLogrusLogger() *logrus.Logger {
 	return l
 }
 
-// Fields is a map string interface to define fields in the structured log
+// Fields is a map string interface to define fields in the structured log.
 type Fields map[string]interface{}
 
-// With allow us to define fields in out structured logs
+// With allow us to define fields in out structured logs.
 func (f Fields) With(k string, v interface{}) Fields {
 	f[k] = v
+
 	return f
 }
 
-// WithFields allow us to define fields in out structured logs
+// WithFields allow us to define fields in out structured logs.
 func (f Fields) WithFields(f2 Fields) Fields {
 	for k, v := range f2 {
 		f[k] = v
 	}
+
 	return f
 }
 
-// WithFields allow us to define fields in out structured logs
+// WithFields allow us to define fields in out structured logs.
 func WithFields(fields Fields) Logger {
 	return defaultLogger.WithFields(logrus.Fields(fields))
 }

@@ -27,20 +27,20 @@ type Provider interface {
 	IsSet(key string) bool
 }
 
-var defaultConfig *viper.Viper
+var defaultConfig *viper.Viper // nolint:gochecknoglobals
 
-// Config returns a default config providers
+// Config returns a default config providers.
 func Config() Provider {
 	return defaultConfig
 }
 
-// LoadConfigProvider returns a configured viper instance
+// LoadConfigProvider returns a configured viper instance.
 func LoadConfigProvider(appName string) Provider {
 	return readViperConfig(appName)
 }
 
 // Initialize must be called at the very beginning of the application
-// and before any other function of this package
+// and before any other function of this package.
 func Initialize() {
 	defaultConfig = readViperConfig("{{cookiecutter.main_name|upper}}")
 }

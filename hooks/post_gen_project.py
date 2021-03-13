@@ -61,14 +61,6 @@ def remove_logrus_files():
         PROJECT_DIRECTORY, "log"
     ))
 
-def remove_cobra_files():
-    """
-    Removes files needed for viper config utils
-    """
-    shutil.rmtree(os.path.join(
-        PROJECT_DIRECTORY, "cmd"
-    ))
-
 # 1. Remove Dockerfiles if docker is not going to be used
 if '{{ cookiecutter.use_docker }}'.lower() != 'y':
     remove_docker_files()
@@ -81,11 +73,7 @@ if '{{ cookiecutter.use_viper_config }}'.lower() != 'y':
 if '{{ cookiecutter.use_logrus_logging }}'.lower() != 'y':
     remove_logrus_files()
 
-# 4. Remove cobra utils if not seleted
-if '{{ cookiecutter.use_cobra_cmd }}'.lower() != 'y':
-    remove_cobra_files()
-
-# 5. Initialize Git (should be run after all file have been modified or deleted)
+# 4. Initialize Git (should be run after all file have been modified or deleted)
 if '{{ cookiecutter.use_git }}'.lower() == 'y':
     init_git()
 else:
