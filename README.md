@@ -70,8 +70,6 @@ docker_image [lacion/docker-alpine:latest]: lacion/docker-alpine:latest
 docker_build_image [lacion/docker-alpine:gobuildimage]: lacion/docker-alpine:gobuildimage
 use_docker [y]: y
 use_git [y]: y
-use_logrus_logging [y]: y
-use_viper_config [y]: y
 ```
 
 Enter the project and take a look around:

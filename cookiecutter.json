@@ -8,7 +8,5 @@
     "docker_build_image": "dial/golang-buildimage",
     "docker_build_image_version": "1.11.9",
     "use_docker": "y",
-    "use_git": "y",
-    "use_logrus_logging": "y",
-    "use_viper_config": "y"
+    "use_git": "y"
 }

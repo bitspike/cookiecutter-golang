@@ -1,6 +1,7 @@
 package config
 
 import (
+	"bytes"
 	"time"
 
 	"github.com/spf13/viper"
@@ -47,14 +48,15 @@ func Initialize() {
 
 func readViperConfig(appName string) *viper.Viper {
 	v := viper.New()
+	v.SetConfigType("yaml")
 	v.SetEnvPrefix(appName)
 	v.AutomaticEnv()
 
-	// global defaults
-	{%- if cookiecutter.use_logrus_logging == "y" %}
-	v.SetDefault("json_logs", false)
-	v.SetDefault("loglevel", "debug")
-	{%- endif %}
+	// Load default configuration
+	err := v.ReadConfig(bytes.NewBuffer([]byte(getDefaultConfig())))
+	if err != nil {
+		panic(err)
+	}
 
 	return v
 }

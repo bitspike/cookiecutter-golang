@@ -65,15 +65,7 @@ def remove_logrus_files():
 if '{{ cookiecutter.use_docker }}'.lower() != 'y':
     remove_docker_files()
 
-# 2. Remove viper config if not seleted
-if '{{ cookiecutter.use_viper_config }}'.lower() != 'y':
-    remove_viper_files()
-
-# 3. Remove logrus utils if not seleted
-if '{{ cookiecutter.use_logrus_logging }}'.lower() != 'y':
-    remove_logrus_files()
-
-# 4. Initialize Git (should be run after all file have been modified or deleted)
+# 2. Initialize Git (should be run after all file have been modified or deleted)
 if '{{ cookiecutter.use_git }}'.lower() == 'y':
     init_git()
 else:
