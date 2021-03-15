@@ -4,9 +4,9 @@
     "main_name": "{{cookiecutter.app_name.split('/')[-1]}}",
     "project_short_description": "A Golang project.",
     "docker_hub_username": "dial",
-    "docker_image": "dial/base-image:latest",
-    "docker_build_image": "dial/golang-buildimage",
-    "docker_build_image_version": "1.11.9",
+    "docker_image": "scratch",
+    "docker_build_image": "golang",
+    "docker_build_image_version": "latest",
     "use_docker": "y",
     "use_git": "y"
 }

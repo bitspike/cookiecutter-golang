@@ -1,5 +1,5 @@
 {% if cookiecutter.use_docker == "y" %}
-.PHONY: build build-alpine clean test help default
+.PHONY: build build-docker clean test help default
 {% else %}
 .PHONY: build clean test help default
 {% endif %}

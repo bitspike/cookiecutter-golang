@@ -11,7 +11,8 @@ ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ADD . /go/src/{{cookiecutter.app_name}}
 WORKDIR /go/src/{{cookiecutter.app_name}}
 
-RUN make build-alpine
+RUN make build-docker
+RUN ls -ahl /go/src/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}}
 
 # Final Stage
 FROM {{cookiecutter.docker_image}}
@@ -26,13 +27,11 @@ ENV PATH=$PATH:/opt/{{cookiecutter.app_name}}/bin
 
 WORKDIR /opt/{{cookiecutter.app_name}}/bin
 
-COPY --from=build-stage /go/src/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}} /opt/{{cookiecutter.app_name}}/bin/
-RUN chmod +x /opt/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}}
+COPY --from=build-stage /go/src/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}} /opt/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}}
+# RUN chmod +x /opt/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}}
 
 # Create appuser
-RUN adduser -D -g '' {{cookiecutter.app_name}}
-USER {{cookiecutter.app_name}}
+# RUN adduser -D -g '' {{cookiecutter.app_name}}
+# USER {{cookiecutter.app_name}}
 
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-
-CMD ["/opt/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}}"]
+ENTRYPOINT ["/opt/{{cookiecutter.app_name}}/bin/{{cookiecutter.app_name}}"]
